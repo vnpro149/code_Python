@@ -9,7 +9,7 @@ USER = 'developer'
 PASS = 'C1sco12345'
 
 def get_configured_interfaces():
-    """Retrieving state data (routes) from RESTCONF."""
+    """Lay thong tin qua RESTCONF."""
     url = "https://{h}:{p}/restconf/data/ietf-interfaces:interfaces".format(h=HOST, p=PORT)
     #Dat header cho cau truy van restconf
     headers = {'Content-Type': 'application/yang-data+json',
