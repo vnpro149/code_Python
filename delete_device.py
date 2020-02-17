@@ -7,8 +7,8 @@ import pgpd
 import get_network_device
 
 def get_device_id():
-    inputString= input("Nhap so thu tu cua thiet bi can xoa:")
-    number=0
+    inputString = input("Nhap so thu tu cua thiet bi can xoa:")
+    number =0
     device =[]
     resp = pgpd.get(api="network-device")
     response_json = resp.json() 
@@ -16,11 +16,11 @@ def get_device_id():
     for item in device:
         number +=1
         if number==int(inputString):
-            id_selete= item["id"]
+            id_selete = item["id"]
     return id_selete
 #Xoa thiet bi
 def delete_device():
-    id=get_device_id()
+    id = get_device_id()
     try:
         resp = pgpd.delete(api="network-device/"+id)
         status = resp.status_code
