@@ -6,11 +6,6 @@ from tabulate import tabulate
 import pgpd
 import get_network_device
 
-#Lay danh sach cac thiet bi
-result = get_network_device.network_device_list()
-print(tabulate(result,
-            headers = ['number','hostname','ip','type','mac address','id'], tablefmt="rst"))
-#####################################
 def get_device_id():
     inputString= input("Nhap so thu tu cua thiet bi can xoa:")
     number=0
@@ -35,5 +30,8 @@ def delete_device():
     except:
         print("Something wrong")
         sys.exit()
-
+#Lay danh sach cac thiet bi
+result = get_network_device.network_device_list()
+print(tabulate(result,
+            headers = ['number','hostname','ip','type','mac address','id'], tablefmt="rst"))
 result2 = delete_device()
