@@ -34,6 +34,20 @@ def network_device_list():
     #thư viện tabulate dùng để khi in dữ liệu ra theo format đã được xây dựng sẵn
     return (device_list)
 
+def get_device_id():
+    inputString= input("Nhap so thu tu cua thiet bi can xoa:")
+    number=0
+    device =[]
+    resp = pgpd.get(api="network-device")
+    response_json = resp.json() 
+    device = response_json["response"]
+    for item in device:
+        number +=1
+        if number==int(inputString):
+            id_selete= item["id"]
+    return id_selete
+"""
 result = network_device_list()
 print(tabulate(result,
             headers = ['number','hostname','ip','type','mac address','id'], tablefmt="rst"))
+"""
