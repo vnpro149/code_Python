@@ -23,14 +23,18 @@ def get_device_id():
 #Xoa thiet bi
 def delete_device():
     id = get_device_id()
-    try:
-        resp = pgpd.delete(api="network-device/"+id)
-        status = resp.status_code
-        response_json = resp.json()
-        r = response_json["response"]
-        print(r)
-    except:
-        print("Something wrong")
+    choose = input('Xoa thiet bi vua chon? (y/n):')
+    if choose == 'y':
+        try:
+            resp = pgpd.delete(api="network-device/"+id)
+            status = resp.status_code
+            response_json = resp.json()
+            r = response_json["response"]
+            print(r)
+        except:
+            print("Something wrong")
+            sys.exit()
+    if choose == 'n':
         sys.exit()
 
 def main():
@@ -38,6 +42,7 @@ def main():
     result = get_network_device.network_device_list()
     print(tabulate(result,
             headers = ['number','hostname','ip','type','mac address','id'], tablefmt="rst"))
+    print("Delete device")
     result2 = delete_device()
 
 if __name__ == '__main__':
