@@ -8,7 +8,7 @@ import get_network_device
 
 #Lay so id cua thiet bi
 def get_device_id():
-    inputString = input("Nhap so thu tu cua thiet bi can xoa:")
+    inputString = input("Nhap so thu tu cua thiet bi can chon:")
     device =[]
     resp = pgpd.get(api="network-device")
     response_json = resp.json() 
