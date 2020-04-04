@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<user>
+    <id>3242</id>
+    <first_name>Ray</first_name>
+    <last_name>Smith</last_name>
+    <birth_date>1979-08-15</birth_date>
+    <address>
+        <street>94873 Ledner Rue</street>
+        <city>Royal Oak</city>
+        <postal_code>44663</postal_code>
+        <state>OH</state>
+        <primary>1</primary>
+    </address>
+    <address>
+        <street>832 William Ave</street>
+        <city>Elnaville</city>
+        <postal_code>17319</postal_code>
+        <state>EL</state>
+        <primary>0</primary>
+    </address>
+    <score>18.3</score>
+</user>

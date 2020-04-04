@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<item>
+    <a:table xmlns:a="https://www.example.com/network">
+        <a:tr>
+            <a:td>Router</a:td>
+            <a:td>Switch</a:td>
+        </a:tr>
+    </a:table>
+
+    <b:table xmlns:b="https://www.example.com/furniture">
+        <b:name>Coffee Table</b:name>
+        <b:length>180</b:length>
+        <b:width>80</b:width>
+    </b:table>
+</item>
