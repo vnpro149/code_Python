@@ -49,6 +49,19 @@ def get(ip=controller.APICEM_IP,ver=controller.VERSION,uname=controller.USERNAME
         print("Something wrong",api)
         sys.exit()
 
+def post(ip=controller.APICEM_IP, ver=controller.VERSION, uname=controller.USERNAME, pword=controller.PASSWORD, api='', params=''):
+    token = get_auth_token(ip,ver,uname,pword)
+    headers = {"content-type" : "application/json","X-Auth-Token": token}
+    url = "https://"+ip+"/api/"+ver+"/"+api
+    print ("\nExecuting POST '%s'\n"%url)
+    try:
+        resp= requests.post(url,json.dumps(params),headers=headers,verify = False)
+        print ("POST '%s' Status: "%api,resp.status_code,'\n')
+        return(resp)
+    except:
+       print ("Something wrong with POST /",api)
+       sys.exit()
+       
 # Tạo hàm put chỉnh sửa thông tin
 def put(ip=controller.APICEM_IP,ver=controller.VERSION,uname=controller.USERNAME,pword=controller.PASSWORD,api='',params=''):
     ticket = get_auth_token(ip,ver,uname,pword)
