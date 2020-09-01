@@ -1,0 +1,312 @@
+2020-08-20 15:40:46,716 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'sh ip int brief'} on 2 hosts
+2020-08-20 15:44:53,704 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'sh ver'} on 2 hosts
+2020-08-20 15:47:39,039 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_config' with args {'command_string': ['int loop 10', 'ip add 10.10.10.10 255.255.255.0']} on 2 hosts
+2020-08-20 15:47:44,363 - nornir.core.task -    ERROR -      start() - Host 'CSR1': task 'netmiko_send_config' failed with traceback:
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/usr/local/lib/python3.6/dist-packages/nornir/plugins/tasks/networking/netmiko_send_config.py", line 31, in netmiko_send_config
+    raise ValueError("Must specify either config_commands or config_file")
+ValueError: Must specify either config_commands or config_file
+
+2020-08-20 15:47:44,365 - nornir.core.task -    ERROR -      start() - Host 'CSR2': task 'netmiko_send_config' failed with traceback:
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/usr/local/lib/python3.6/dist-packages/nornir/plugins/tasks/networking/netmiko_send_config.py", line 31, in netmiko_send_config
+    raise ValueError("Must specify either config_commands or config_file")
+ValueError: Must specify either config_commands or config_file
+
+2020-08-20 15:50:43,688 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_config' with args {'config_commands': ['int loop 10', 'ip add 10.10.10.10 255.255.255.0']} on 2 hosts
+2020-08-27 17:05:59,826 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['facts', 'interfaces', 'arp_table']} on 2 hosts
+2020-08-27 17:06:02,104 - nornir.core.task -    ERROR -      start() - Host 'CSR1': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/netmiko/base_connection.py", line 915, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "/usr/local/lib/python3.6/dist-packages/paramiko/client.py", line 446, in connect
+    passphrase,
+  File "/usr/local/lib/python3.6/dist-packages/paramiko/client.py", line 764, in _auth
+    raise saved_exception
+  File "/usr/local/lib/python3.6/dist-packages/paramiko/client.py", line 751, in _auth
+    self._transport.auth_password(username, password)
+  File "/usr/local/lib/python3.6/dist-packages/paramiko/transport.py", line 1509, in auth_password
+    return self.auth_handler.wait_for_response(my_event)
+  File "/usr/local/lib/python3.6/dist-packages/paramiko/auth_handler.py", line 250, in wait_for_response
+    raise e
+paramiko.ssh_exception.AuthenticationException: Authentication failed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/usr/local/lib/python3.6/dist-packages/nornir/plugins/tasks/networking/napalm_get.py", line 49, in napalm_get
+    device = task.host.get_connection("napalm", task.nornir.config)
+  File "/usr/local/lib/python3.6/dist-packages/nornir/core/inventory.py", line 302, in get_connection
+    extras=conn.extras,
+  File "/usr/local/lib/python3.6/dist-packages/nornir/core/inventory.py", line 352, in open_connection
+    configuration=configuration,
+  File "/usr/local/lib/python3.6/dist-packages/nornir/plugins/connections/napalm.py", line 51, in open
+    connection.open()
+  File "/usr/local/lib/python3.6/dist-packages/napalm/ios/ios.py", line 169, in open
+    device_type, netmiko_optional_args=self.netmiko_optional_args
+  File "/usr/local/lib/python3.6/dist-packages/napalm/base/base.py", line 96, in _netmiko_open
+    **netmiko_optional_args
+  File "/usr/local/lib/python3.6/dist-packages/netmiko/ssh_dispatcher.py", line 298, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/netmiko/base_connection.py", line 341, in __init__
+    self._open()
+  File "/usr/local/lib/python3.6/dist-packages/netmiko/base_connection.py", line 346, in _open
+    self.establish_connection()
+  File "/usr/local/lib/python3.6/dist-packages/netmiko/base_connection.py", line 944, in establish_connection
+    raise NetmikoAuthenticationException(msg)
+netmiko.ssh_exception.NetmikoAuthenticationException: Authentication failure: unable to connect cisco_ios 10.215.26.170:22
+Authentication failed.
+
+2020-08-27 17:06:04,852 - nornir.core.task -    ERROR -      start() - Host 'CSR2': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/netmiko/base_connection.py", line 915, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "/usr/local/lib/python3.6/dist-packages/paramiko/client.py", line 349, in connect
+    retry_on_signal(lambda: sock.connect(addr))
+  File "/usr/local/lib/python3.6/dist-packages/paramiko/util.py", line 283, in retry_on_signal
+    return function()
+  File "/usr/local/lib/python3.6/dist-packages/paramiko/client.py", line 349, in <lambda>
+    retry_on_signal(lambda: sock.connect(addr))
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/napalm/base/base.py", line 96, in _netmiko_open
+    **netmiko_optional_args
+  File "/usr/local/lib/python3.6/dist-packages/netmiko/ssh_dispatcher.py", line 298, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/netmiko/base_connection.py", line 341, in __init__
+    self._open()
+  File "/usr/local/lib/python3.6/dist-packages/netmiko/base_connection.py", line 346, in _open
+    self.establish_connection()
+  File "/usr/local/lib/python3.6/dist-packages/netmiko/base_connection.py", line 937, in establish_connection
+    raise NetmikoTimeoutException(msg)
+netmiko.ssh_exception.NetmikoTimeoutException: TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: cisco_ios 10.215.26.171:22
+
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/usr/local/lib/python3.6/dist-packages/nornir/plugins/tasks/networking/napalm_get.py", line 49, in napalm_get
+    device = task.host.get_connection("napalm", task.nornir.config)
+  File "/usr/local/lib/python3.6/dist-packages/nornir/core/inventory.py", line 302, in get_connection
+    extras=conn.extras,
+  File "/usr/local/lib/python3.6/dist-packages/nornir/core/inventory.py", line 352, in open_connection
+    configuration=configuration,
+  File "/usr/local/lib/python3.6/dist-packages/nornir/plugins/connections/napalm.py", line 51, in open
+    connection.open()
+  File "/usr/local/lib/python3.6/dist-packages/napalm/ios/ios.py", line 169, in open
+    device_type, netmiko_optional_args=self.netmiko_optional_args
+  File "/usr/local/lib/python3.6/dist-packages/napalm/base/base.py", line 99, in _netmiko_open
+    raise ConnectionException("Cannot connect to {}".format(self.hostname))
+napalm.base.exceptions.ConnectionException: Cannot connect to 10.215.26.171
+
+2020-08-27 17:07:01,494 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['facts', 'interfaces', 'arp_table']} on 2 hosts
+2020-08-27 17:07:03,570 - nornir.core.task -    ERROR -      start() - Host 'CSR1': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tien/.local/lib/python3.6/site-packages/netmiko/base_connection.py", line 915, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "/home/tien/.local/lib/python3.6/site-packages/paramiko/client.py", line 446, in connect
+    passphrase,
+  File "/home/tien/.local/lib/python3.6/site-packages/paramiko/client.py", line 764, in _auth
+    raise saved_exception
+  File "/home/tien/.local/lib/python3.6/site-packages/paramiko/client.py", line 751, in _auth
+    self._transport.auth_password(username, password)
+  File "/home/tien/.local/lib/python3.6/site-packages/paramiko/transport.py", line 1509, in auth_password
+    return self.auth_handler.wait_for_response(my_event)
+  File "/home/tien/.local/lib/python3.6/site-packages/paramiko/auth_handler.py", line 250, in wait_for_response
+    raise e
+paramiko.ssh_exception.AuthenticationException: Authentication failed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/usr/local/lib/python3.6/dist-packages/nornir/plugins/tasks/networking/napalm_get.py", line 49, in napalm_get
+    device = task.host.get_connection("napalm", task.nornir.config)
+  File "/usr/local/lib/python3.6/dist-packages/nornir/core/inventory.py", line 302, in get_connection
+    extras=conn.extras,
+  File "/usr/local/lib/python3.6/dist-packages/nornir/core/inventory.py", line 352, in open_connection
+    configuration=configuration,
+  File "/usr/local/lib/python3.6/dist-packages/nornir/plugins/connections/napalm.py", line 51, in open
+    connection.open()
+  File "/home/tien/.local/lib/python3.6/site-packages/napalm/ios/ios.py", line 169, in open
+    device_type, netmiko_optional_args=self.netmiko_optional_args
+  File "/home/tien/.local/lib/python3.6/site-packages/napalm/base/base.py", line 92, in _netmiko_open
+    **netmiko_optional_args
+  File "/home/tien/.local/lib/python3.6/site-packages/netmiko/ssh_dispatcher.py", line 298, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/home/tien/.local/lib/python3.6/site-packages/netmiko/base_connection.py", line 341, in __init__
+    self._open()
+  File "/home/tien/.local/lib/python3.6/site-packages/netmiko/base_connection.py", line 346, in _open
+    self.establish_connection()
+  File "/home/tien/.local/lib/python3.6/site-packages/netmiko/base_connection.py", line 944, in establish_connection
+    raise NetmikoAuthenticationException(msg)
+netmiko.ssh_exception.NetmikoAuthenticationException: Authentication failure: unable to connect cisco_ios 10.215.26.170:22
+Authentication failed.
+
+2020-08-27 17:07:06,503 - nornir.core.task -    ERROR -      start() - Host 'CSR2': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tien/.local/lib/python3.6/site-packages/netmiko/base_connection.py", line 915, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "/home/tien/.local/lib/python3.6/site-packages/paramiko/client.py", line 349, in connect
+    retry_on_signal(lambda: sock.connect(addr))
+  File "/home/tien/.local/lib/python3.6/site-packages/paramiko/util.py", line 283, in retry_on_signal
+    return function()
+  File "/home/tien/.local/lib/python3.6/site-packages/paramiko/client.py", line 349, in <lambda>
+    retry_on_signal(lambda: sock.connect(addr))
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/tien/.local/lib/python3.6/site-packages/napalm/base/base.py", line 92, in _netmiko_open
+    **netmiko_optional_args
+  File "/home/tien/.local/lib/python3.6/site-packages/netmiko/ssh_dispatcher.py", line 298, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/home/tien/.local/lib/python3.6/site-packages/netmiko/base_connection.py", line 341, in __init__
+    self._open()
+  File "/home/tien/.local/lib/python3.6/site-packages/netmiko/base_connection.py", line 346, in _open
+    self.establish_connection()
+  File "/home/tien/.local/lib/python3.6/site-packages/netmiko/base_connection.py", line 937, in establish_connection
+    raise NetmikoTimeoutException(msg)
+netmiko.ssh_exception.NetmikoTimeoutException: TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: cisco_ios 10.215.26.171:22
+
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/usr/local/lib/python3.6/dist-packages/nornir/plugins/tasks/networking/napalm_get.py", line 49, in napalm_get
+    device = task.host.get_connection("napalm", task.nornir.config)
+  File "/usr/local/lib/python3.6/dist-packages/nornir/core/inventory.py", line 302, in get_connection
+    extras=conn.extras,
+  File "/usr/local/lib/python3.6/dist-packages/nornir/core/inventory.py", line 352, in open_connection
+    configuration=configuration,
+  File "/usr/local/lib/python3.6/dist-packages/nornir/plugins/connections/napalm.py", line 51, in open
+    connection.open()
+  File "/home/tien/.local/lib/python3.6/site-packages/napalm/ios/ios.py", line 169, in open
+    device_type, netmiko_optional_args=self.netmiko_optional_args
+  File "/home/tien/.local/lib/python3.6/site-packages/napalm/base/base.py", line 95, in _netmiko_open
+    raise ConnectionException("Cannot connect to {}".format(self.hostname))
+napalm.base.exceptions.ConnectionException: Cannot connect to 10.215.26.171
+
+2020-08-27 17:12:07,757 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['facts', 'interfaces', 'arp_table']} on 1 hosts
+2020-08-27 17:13:16,715 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['facts', 'interfaces', 'arp_table']} on 1 hosts
+2020-08-27 17:17:21,934 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'sh ip int br'} on 1 hosts
+2020-08-27 17:17:49,018 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'sh ip int br'} on 1 hosts
+2020-08-27 17:17:54,586 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': ' sh ip route'} on 1 hosts
+2020-08-27 17:19:00,992 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'sh run'} on 1 hosts
+2020-09-01 13:59:44,782 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['facts', 'interfaces', 'arp_table']} on 4 hosts
+2020-09-01 13:59:46,689 - nornir.core.task -    ERROR -      start() - Host 'CSR1': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tien/.local/lib/python3.6/site-packages/netmiko/base_connection.py", line 915, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "/home/tien/.local/lib/python3.6/site-packages/paramiko/client.py", line 446, in connect
+    passphrase,
+  File "/home/tien/.local/lib/python3.6/site-packages/paramiko/client.py", line 764, in _auth
+    raise saved_exception
+  File "/home/tien/.local/lib/python3.6/site-packages/paramiko/client.py", line 751, in _auth
+    self._transport.auth_password(username, password)
+  File "/home/tien/.local/lib/python3.6/site-packages/paramiko/transport.py", line 1509, in auth_password
+    return self.auth_handler.wait_for_response(my_event)
+  File "/home/tien/.local/lib/python3.6/site-packages/paramiko/auth_handler.py", line 250, in wait_for_response
+    raise e
+paramiko.ssh_exception.AuthenticationException: Authentication failed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/usr/local/lib/python3.6/dist-packages/nornir/plugins/tasks/networking/napalm_get.py", line 49, in napalm_get
+    device = task.host.get_connection("napalm", task.nornir.config)
+  File "/usr/local/lib/python3.6/dist-packages/nornir/core/inventory.py", line 302, in get_connection
+    extras=conn.extras,
+  File "/usr/local/lib/python3.6/dist-packages/nornir/core/inventory.py", line 352, in open_connection
+    configuration=configuration,
+  File "/usr/local/lib/python3.6/dist-packages/nornir/plugins/connections/napalm.py", line 51, in open
+    connection.open()
+  File "/home/tien/.local/lib/python3.6/site-packages/napalm/ios/ios.py", line 169, in open
+    device_type, netmiko_optional_args=self.netmiko_optional_args
+  File "/home/tien/.local/lib/python3.6/site-packages/napalm/base/base.py", line 92, in _netmiko_open
+    **netmiko_optional_args
+  File "/home/tien/.local/lib/python3.6/site-packages/netmiko/ssh_dispatcher.py", line 298, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/home/tien/.local/lib/python3.6/site-packages/netmiko/base_connection.py", line 341, in __init__
+    self._open()
+  File "/home/tien/.local/lib/python3.6/site-packages/netmiko/base_connection.py", line 346, in _open
+    self.establish_connection()
+  File "/home/tien/.local/lib/python3.6/site-packages/netmiko/base_connection.py", line 944, in establish_connection
+    raise NetmikoAuthenticationException(msg)
+netmiko.ssh_exception.NetmikoAuthenticationException: Authentication failure: unable to connect cisco_ios 10.215.26.170:22
+Authentication failed.
+
+2020-09-01 14:00:25,645 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'sh ip int br'} on 4 hosts
+2020-09-01 14:00:27,225 - nornir.core.task -    ERROR -      start() - Host 'CSR1': task 'netmiko_send_command' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tien/.local/lib/python3.6/site-packages/netmiko/base_connection.py", line 915, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "/home/tien/.local/lib/python3.6/site-packages/paramiko/client.py", line 446, in connect
+    passphrase,
+  File "/home/tien/.local/lib/python3.6/site-packages/paramiko/client.py", line 764, in _auth
+    raise saved_exception
+  File "/home/tien/.local/lib/python3.6/site-packages/paramiko/client.py", line 751, in _auth
+    self._transport.auth_password(username, password)
+  File "/home/tien/.local/lib/python3.6/site-packages/paramiko/transport.py", line 1509, in auth_password
+    return self.auth_handler.wait_for_response(my_event)
+  File "/home/tien/.local/lib/python3.6/site-packages/paramiko/auth_handler.py", line 250, in wait_for_response
+    raise e
+paramiko.ssh_exception.AuthenticationException: Authentication failed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/usr/local/lib/python3.6/dist-packages/nornir/plugins/tasks/networking/netmiko_send_command.py", line 26, in netmiko_send_command
+    net_connect = task.host.get_connection("netmiko", task.nornir.config)
+  File "/usr/local/lib/python3.6/dist-packages/nornir/core/inventory.py", line 302, in get_connection
+    extras=conn.extras,
+  File "/usr/local/lib/python3.6/dist-packages/nornir/core/inventory.py", line 352, in open_connection
+    configuration=configuration,
+  File "/usr/local/lib/python3.6/dist-packages/nornir/plugins/connections/netmiko.py", line 58, in open
+    self.connection = ConnectHandler(**parameters)
+  File "/home/tien/.local/lib/python3.6/site-packages/netmiko/ssh_dispatcher.py", line 298, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/home/tien/.local/lib/python3.6/site-packages/netmiko/base_connection.py", line 341, in __init__
+    self._open()
+  File "/home/tien/.local/lib/python3.6/site-packages/netmiko/base_connection.py", line 346, in _open
+    self.establish_connection()
+  File "/home/tien/.local/lib/python3.6/site-packages/netmiko/base_connection.py", line 944, in establish_connection
+    raise NetmikoAuthenticationException(msg)
+netmiko.ssh_exception.NetmikoAuthenticationException: Authentication failure: unable to connect cisco_ios 10.215.26.170:22
+Authentication failed.
+
