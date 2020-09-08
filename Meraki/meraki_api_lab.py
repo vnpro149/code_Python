@@ -64,24 +64,6 @@ def get_devices_list():
     devices_list = json.dumps(resp.json(), indent=4)
     return devices_list
 
-#Xem thiet bi nao co NetworkId la null thi moi them duoc
-def get_organization_inventory():
-    org_id = get_organization_id()
-    resp = pgpd.get(api="/organizations/{}/inventory".format(org_id))
-    org_inventory = json.dumps(resp.json(), indent=4)
-    return org_inventory
-
-def find_networkId_null_in_org_inventory():
-    org_inventory = json.loads(get_organization_inventory())
-    device_list = []
-    i=0
-    for device in org_inventory:
-        i += 1
-        if device['networkId'] is None:
-            device_list.append(device)
-    filtered_list = json.dumps(device_list, indent = 4)
-    return filtered_list
-
 def claim_device_into_network():
     network_id = get_network_id()
     #serial format:"Q2XX-XXXX-XXXX"
@@ -130,11 +112,10 @@ def menu():
     3. In danh sach cac network
     4. Tao network
     5. Lay danh sach cac thiet bi trong network
-    6. Xem danh sach cac thiet bi trong inventory
-    7. Xem danh sach cac thiet bi chua duoc su dung trong inventory
-    8. Dua thiet bi vao trong mang
-    9. Xoa thiet bi ra khoi mang
-    10.Lay thong tin thiet bi    
+    6. Dua thiet bi vao trong mang
+    7. Xoa thiet bi ra khoi mang
+    8. Lay thong tin thiet bi
+    9. Lay org id    
     0. Thoat chuong trinh
     ########################## """)
     choice = int(input("Nhap so thu tu chuc nang can chon: "))
@@ -159,21 +140,15 @@ def main():
             result = get_devices_list()
             print(result)
         elif choice == 6:
-            result = get_organization_inventory()
-            print(result)
-        elif choice == 7:
-            result = find_networkId_null_in_org_inventory()
-            print(result)
-        elif choice == 8:
             result = claim_device_into_network()
             print(result)
-        elif choice == 9:
+        elif choice == 7:
             result = remove_device_from_network()
             print(result)
-        elif choice == 10:
+        elif choice == 8:
             result = get_single_device()
             print(result)
-        elif choice == 11:
+        elif choice == 9:
             result = get_organization_id()
             print(result)
         elif choice == 0:
